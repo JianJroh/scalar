@@ -110,6 +110,8 @@ const {
   plugins?: ClientPlugin[]
   /** For environment variables in the inputs */
   environment: XScalarEnvironment
+  /** The proxy URL for cookie domain determination */
+  proxyUrl?: string
 }>()
 
 const emit = defineEmits<{
@@ -119,7 +121,7 @@ const emit = defineEmits<{
 
 /** Execute the current operation example */
 const handleExecute = () => {
-  buildRequest({
+  const [error, result] = buildRequest({
     environment,
     exampleKey,
     globalCookies,
@@ -131,8 +133,15 @@ const handleExecute = () => {
     server,
     proxyUrl,
   })
+
+  if (error) {
+    // Toast the error
+    return
+  }
+
   eventBus.emit('operation:send:request', {
     meta: { path, method, exampleKey },
+    payload: { request: result.request },
   })
 }
 
