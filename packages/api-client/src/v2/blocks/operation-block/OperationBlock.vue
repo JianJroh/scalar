@@ -120,7 +120,7 @@ const emit = defineEmits<{
 }>()
 
 /** Execute the current operation example */
-const handleExecute = () => {
+const handleExecute = async () => {
   const [error, result] = buildRequest({
     environment,
     exampleKey,
@@ -139,7 +139,7 @@ const handleExecute = () => {
     return
   }
 
-  console.log('result', result)
+  await fetch(result.request)
 
   eventBus.emit('operation:send:request', {
     meta: { path, method, exampleKey },
