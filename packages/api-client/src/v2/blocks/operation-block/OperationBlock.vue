@@ -139,6 +139,8 @@ const handleExecute = () => {
     return
   }
 
+  console.log('result', result)
+
   eventBus.emit('operation:send:request', {
     meta: { path, method, exampleKey },
     payload: { request: result.request },
