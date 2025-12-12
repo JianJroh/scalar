@@ -43,24 +43,24 @@ import type { ClientPlugin } from '@/v2/plugins'
 import Header from './components/Header.vue'
 
 const {
-  cookies = [],
-  eventBus,
-  path,
-  method,
-  exampleKey,
-  operation,
   environment,
-  server,
+  eventBus,
+  exampleKey,
+  globalCookies = [],
+  method,
+  operation,
+  path,
   proxyUrl,
   securitySchemes,
   selectedSecurity,
+  server,
 } = defineProps<{
-  /** Workspace/document cookies */
-  cookies: XScalarCookie[]
   /** Event bus */
   eventBus: WorkspaceEventBus
   /** Application version */
   appVersion: string
+  /** Workspace/document cookies */
+  globalCookies: XScalarCookie[]
   /** Current request path */
   path: string
   /** Current request method */
@@ -120,9 +120,9 @@ const emit = defineEmits<{
 /** Execute the current operation example */
 const handleExecute = () => {
   buildRequest({
-    cookies,
     environment,
     exampleKey,
+    globalCookies,
     method,
     operation,
     path,
@@ -167,7 +167,7 @@ onBeforeUnmount(() => {
         @update:servers="emit('update:servers')" />
     </div>
 
-    <ViewLayout>
+    <ViewLayout class="border-t">
       <ViewLayoutContent class="flex-1">
         <!-- Request Section -->
         <RequestBlock
