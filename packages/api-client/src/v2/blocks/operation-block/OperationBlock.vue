@@ -46,6 +46,7 @@ import { type ClientPlugin } from '@/v2/helpers/plugins'
 import Header from './components/Header.vue'
 
 const {
+  authMeta,
   environment,
   eventBus,
   exampleKey,
@@ -99,7 +100,7 @@ const {
   /** Currently selected example key for the current operation */
   exampleKey: string
   /** Meta information for the auth update */
-  authMeta?: AuthMeta
+  authMeta: AuthMeta
   /** Document defined security schemes */
   securitySchemes: NonNullable<OpenApiDocument['components']>['securitySchemes']
   /** Currently selected security for the current operation */
@@ -224,7 +225,8 @@ onBeforeUnmount(() => {
           :proxyUrl
           :security
           :securitySchemes
-          :selectedSecurity />
+          :selectedSecurity
+          :server />
 
         <!-- Response Section -->
         <ResponseBlock
