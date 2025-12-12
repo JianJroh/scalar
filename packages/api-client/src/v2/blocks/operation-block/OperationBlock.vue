@@ -127,13 +127,13 @@ const handleExecute = () => {
     operation,
     path,
     securitySchemes,
-    selectedSecurity,
+    selectedSecurity: selectedSecurity?.selectedSchemes ?? [],
     server,
     proxyUrl,
   })
-  // eventBus.emit('operation:send:request', {
-  //   meta: { path, method, exampleKey },
-  // })
+  eventBus.emit('operation:send:request', {
+    meta: { path, method, exampleKey },
+  })
 }
 
 /** Handle the hotkey trigger to send the request */
