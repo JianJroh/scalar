@@ -1,6 +1,6 @@
 import { REGEX } from '@scalar/helpers/regex/regex-helpers'
 
-import type { ParsedUrl } from '../types'
+import type { ParsedUrl } from '@/types'
 
 /**
  * Parses a URL string into its component parts.
